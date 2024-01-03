@@ -196,7 +196,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\baseh\\source\\repos\\InstagramService\\InstagramService\\InstagramService.csproj",
-      "projectName": "InstagramService",
+      "projectName": "InstaService",
       "projectPath": "C:\\Users\\baseh\\source\\repos\\InstagramService\\InstagramService\\InstagramService.csproj",
       "packagesPath": "C:\\Users\\baseh\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\baseh\\source\\repos\\InstagramService\\InstagramService\\obj\\",

@@ -1,0 +1,13 @@
+C:\Users\baseh\source\repos\InstagramService\InstagramService\bin\Release\net7.0\InstagramService.deps.json
+C:\Users\baseh\source\repos\InstagramService\InstagramService\bin\Release\net7.0\InstagramService.dll
+C:\Users\baseh\source\repos\InstagramService\InstagramService\bin\Release\net7.0\InstagramService.pdb
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\InstagramService.csproj.AssemblyReference.cache
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\InstagramService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\InstagramService.AssemblyInfoInputs.cache
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\InstagramService.AssemblyInfo.cs
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\InstagramService.csproj.CoreCompileInputs.cache
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\InstagramService.sourcelink.json
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\InstagramService.dll
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\refint\InstagramService.dll
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\InstagramService.pdb
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Release\net7.0\ref\InstagramService.dll

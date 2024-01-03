@@ -1,4 +1,4 @@
-# InstagramService
+# InstaService
 
 This is a wrapper over InstagramApiSharp library.
 Library provides a simple functionality for downloading media from instagram.
@@ -19,5 +19,5 @@ Collections:
 ## Installation
 
 ```bash
-dotnet add package InstagramService
+dotnet add package InstaService
 ```

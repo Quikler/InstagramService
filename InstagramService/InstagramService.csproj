@@ -4,7 +4,7 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<PackageId>InstagramService</PackageId>
+		<PackageId>InstaService</PackageId>
 		<Description>A wrapper library on top of the InstagramApiSharp library. The library provides simple functionality for downloading media files from Instagram.</Description>
 		<Authors>Roman Binyukov | Quikler</Authors>
 		<Copyright>Copyright © 2024 Roman Binyukov | Quikler</Copyright>
