@@ -5,6 +5,8 @@ namespace InstagramService.Classes.Helpers
 {
     internal static class CarouselHelper
     {
+        private const string IMG_INDEX = "img_index=";
+
         public static ArrayList GetCarouselMedias(InstaCarousel carouselItems)
         {
             ArrayList arrayList = new();
@@ -33,13 +35,17 @@ namespace InstagramService.Classes.Helpers
             string uriWithoutQuery = InstaUriHelper.GetPartWithoutQuery(uri);
 
             List<string> queries = uri.GetComponents(UriComponents.Query, UriFormat.Unescaped).Split('&').ToList();
+            int queriesImgIndexIndex = queries.FindIndex(s => s.Contains(IMG_INDEX));
 
-            string imgIndex = "img_index=";
-            int imgIndexIndex = queries.FindIndex(s => s.Contains(imgIndex));
+            if (queriesImgIndexIndex == -1)
+            {
+                queries.Add(string.Empty);
+                queriesImgIndexIndex = queries.Count - 1;
+            }
 
             for (int i = 0; i < instaCarouselItems.Count; i++)
             {
-                queries[imgIndexIndex] = imgIndex + (i + 1);
+                queries[queriesImgIndexIndex] = IMG_INDEX + (i + 1);
                 uris[i] = $"{uriWithoutQuery}?{string.Join('&', queries)}";
             }
 

@@ -29,14 +29,13 @@ namespace InstagramService.Classes
 
         private static async Task<IResult<InstaMediaStreams>> GetStreamsAsync(InstaMedia media, string uri)
         {
-            using HttpClient hc = new();
-
             IReadOnlyList<string> mediaUris = InstaParseHelper.ParseUris(media);
             IReadOnlyList<InstaMediaType> mediaTypes = InstaParseHelper.ParseMediaTypes(media);
             IReadOnlyList<string> initialUris = media.Carousel?.Count > 0 ?
                 CarouselHelper.GetCarouselInitialUris(uri, media.Carousel) : new[] { uri };
 
             InstaMediaStreams instaMediaStreams = new(mediaUris.Count, media);
+            using HttpClient hc = new();
 
             try
             {
@@ -52,7 +51,7 @@ namespace InstagramService.Classes
                     source.CopyTo(dest);
                     dest.Seek(0, SeekOrigin.Begin);
 
-                    instaMediaStreams[i] = new(dest, mediaTypes[i], mediaUris[i], initialUris[i]);
+                    instaMediaStreams[i] = new(dest, mediaTypes[i], mediaUris[i], initialUris[i], i + 1);
                 }
             }
             catch (Exception ex)

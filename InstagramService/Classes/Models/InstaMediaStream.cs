@@ -8,13 +8,16 @@ namespace InstagramService.Classes.Models
         public InstaMediaType MediaType { get; }
         public string Uri { get; }
         public string InitialUri { get; }
+        public int CarouselIndex { get; }
 
-        internal InstaMediaStream(Stream stream, InstaMediaType MediaType, string uri, string initialUri)
+        internal InstaMediaStream(Stream stream, InstaMediaType MediaType, 
+            string uri, string initialUri, int carouselIndex)
         {
             Stream = stream;
             this.MediaType = MediaType;
             Uri = uri;
             InitialUri = initialUri;
+            CarouselIndex = carouselIndex;
         }
 
         ~InstaMediaStream() => Stream?.Dispose();

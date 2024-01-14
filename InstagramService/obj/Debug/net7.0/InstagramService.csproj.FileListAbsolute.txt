@@ -10,3 +10,4 @@ C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Debug\net7.0\I
 C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Debug\net7.0\refint\InstagramService.dll
 C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Debug\net7.0\InstagramService.pdb
 C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Debug\net7.0\ref\InstagramService.dll
+C:\Users\baseh\source\repos\InstagramService\InstagramService\obj\Debug\net7.0\InstagramService.sourcelink.json
