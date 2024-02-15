@@ -2,6 +2,7 @@
 using InstagramApiSharp.Classes;
 using InstagramApiSharp.Classes.Models;
 using InstagramService.Classes.Collections;
+using InstagramService.Classes.Helpers;
 
 namespace InstagramService.Classes
 {
@@ -14,9 +15,33 @@ namespace InstagramService.Classes
             _api = api;
         }
 
+        public async Task<IResult<InstaMediaInfos>> GetInfosAsync(string uri)
+        {
+            IResult<InstaMedia> mediaResult = await GetMediaAsync(uri);
+
+            if (!mediaResult.Succeeded)
+                return Result.Fail<InstaMediaInfos>(mediaResult.Info.Exception);
+
+            InstaMedia media = mediaResult.Value;
+
+            IReadOnlyList<string> mediaUris = InstaParseHelper.ParseUris(media);
+            IReadOnlyList<InstaMediaType> mediaTypes = InstaParseHelper.ParseMediaTypes(media);
+            IReadOnlyList<string> initialUris = media.Carousel?.Count > 0 ?
+                CarouselHelper.GetCarouselInitialUris(uri, media.Carousel) : new[] { uri };
+
+            InstaMediaInfos instaMediaInfos = new(mediaUris.Count, media);
+
+            for (int i = 0; i < mediaUris.Count; i++)
+            {
+                instaMediaInfos[i] = new(mediaTypes[i], mediaUris[i], initialUris[i], i + 1);
+            }
+
+            return Result.Success(instaMediaInfos);
+        }
+
         public async Task<IResult<InstaMedia>> GetMediaAsync(string url)
         {
-            if (!IsUrlValid(url, out Uri? resultUrl))
+            if (!Uri.TryCreate(url, UriKind.Absolute, out Uri? resultUrl))
                 return Result.Fail<InstaMedia>("Invalid url");
 
             IResult<string> mediaIdResult = await _api.MediaProcessor.GetMediaIdFromUrlAsync(resultUrl);
@@ -28,13 +53,6 @@ namespace InstagramService.Classes
                 return Result.Fail<InstaMedia>(mediaIdResult.Info.Exception);
 
             return mediaResult;
-
-            static bool IsUrlValid(string url, out Uri? resultUrl)
-            {
-                if (Uri.TryCreate(url, UriKind.Absolute, out resultUrl))
-                    return true;
-                return false;
-            }
         }
 
         public async Task<IResult<FileInfo[]>> DownloadMediasAsync(InstaMediaStreams mediaStreams,

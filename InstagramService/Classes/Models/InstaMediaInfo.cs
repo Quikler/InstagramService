@@ -1,30 +1,25 @@
 ﻿using InstagramApiSharp.Classes.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace InstagramService.Classes.Models
 {
-    public class InstaMediaStream : IDisposable
+    public class InstaMediaInfo
     {
-        public Stream Stream { get; }
         public InstaMediaType MediaType { get; }
         public string Uri { get; }
         public string InitialUri { get; }
         public int CarouselIndex { get; }
 
-        public InstaMediaStream(Stream stream, InstaMediaType mediaType, 
-            string uri, string initialUri, int carouselIndex)
+        public InstaMediaInfo(InstaMediaType mediaType, string uri, string initialUri, int carouselIndex)
         {
-            Stream = stream;
             MediaType = mediaType;
             Uri = uri;
             InitialUri = initialUri;
             CarouselIndex = carouselIndex;
-        }
-
-        ~InstaMediaStream() => Stream?.Dispose();
-        public void Dispose()
-        {
-            Stream?.Dispose();
-            GC.SuppressFinalize(this);
         }
     }
 }

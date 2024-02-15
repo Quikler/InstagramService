@@ -1,7 +1,6 @@
-﻿using InstagramApiSharp.Classes.Models;
-using InstagramApiSharp.Classes;
-using InstagramService.Classes.Helpers;
+﻿using InstagramApiSharp.Classes;
 using InstagramApiSharp.API;
+using InstagramService.Classes.Models;
 using InstagramService.Classes.Collections;
 
 namespace InstagramService.Classes
@@ -19,29 +18,31 @@ namespace InstagramService.Classes
 
         public async Task<IResult<InstaMediaStreams>> GetMediaStreamsAsync(string url)
         {
-            IResult<InstaMedia> mediaResult = await _instaMediaProcessor.GetMediaAsync(url);
+            IResult<InstaMediaInfos> instaMediaInfosResult = await _instaMediaProcessor.GetInfosAsync(url);
 
-            if (!mediaResult.Succeeded)
-                return Result.Fail<InstaMediaStreams>(mediaResult.Info.Exception);
+            if (!instaMediaInfosResult.Succeeded)
+                return Result.Fail<InstaMediaStreams>(instaMediaInfosResult.Info.Exception);
 
-            return await GetStreamsAsync(mediaResult.Value, url);
+            InstaMediaInfos instaMediaInfos = instaMediaInfosResult.Value;
+
+            return await GetStreamsAsync(instaMediaInfos);
         }
 
-        private static async Task<IResult<InstaMediaStreams>> GetStreamsAsync(InstaMedia media, string uri)
-        {
-            IReadOnlyList<string> mediaUris = InstaParseHelper.ParseUris(media);
-            IReadOnlyList<InstaMediaType> mediaTypes = InstaParseHelper.ParseMediaTypes(media);
-            IReadOnlyList<string> initialUris = media.Carousel?.Count > 0 ?
-                CarouselHelper.GetCarouselInitialUris(uri, media.Carousel) : new[] { uri };
+        public Task<IResult<InstaMediaStreams>> GetMediaStreamsAsync
+            (InstaMediaInfos instaMediaInfos) => GetStreamsAsync(instaMediaInfos);
 
-            InstaMediaStreams instaMediaStreams = new(mediaUris.Count, media);
+        private static async Task<IResult<InstaMediaStreams>> GetStreamsAsync(InstaMediaInfos instaMediaInfos)
+        {
+            InstaMediaStreams instaMediaStreams = new(instaMediaInfos.Count(), instaMediaInfos.Media);
             using HttpClient hc = new();
 
             try
             {
-                for (int i = 0; i < mediaUris.Count; i++)
+                for (int i = 0; i < instaMediaInfos.Count(); i++)
                 {
-                    using HttpResponseMessage response = await hc.GetAsync(mediaUris[i]);
+                    InstaMediaInfo mediaInfo = instaMediaInfos[i];
+
+                    using HttpResponseMessage response = await hc.GetAsync(mediaInfo.Uri);
                     if (!response.IsSuccessStatusCode)
                         return Result.Fail(response.StatusCode.ToString(), instaMediaStreams);
 
@@ -51,7 +52,7 @@ namespace InstagramService.Classes
                     source.CopyTo(dest);
                     dest.Seek(0, SeekOrigin.Begin);
 
-                    instaMediaStreams[i] = new(dest, mediaTypes[i], mediaUris[i], initialUris[i], i + 1);
+                    instaMediaStreams[i] = new(dest, mediaInfo.MediaType, mediaInfo.Uri, mediaInfo.InitialUri, i + 1);
                 }
             }
             catch (Exception ex)

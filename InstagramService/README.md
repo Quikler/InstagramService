@@ -10,11 +10,13 @@ The library is an InstaService class that has dependencies for working with the 
 
 Models:
 
-1. InstaMediaStream - represents a model of media.
+1. InstaMediaStream - represents a model of media with stream data and info.
+2. InstaMediaInfo - represents a model of media with info only.
 
 Collections:
 
 1. InstaMediaStreams - represents a collection of InstaMediaStream objects.
+2. InstaMediainfos - represents a collection of InstaMediaInfo objects.
 
 ## Installation
 

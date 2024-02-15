@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A wrapper library on top of the InstagramApiSharp library. The library provides s" +
     "imple functionality for downloading media files from Instagram.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5c1073893bfb87980e01aa252080a757722249e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de99d9a543459d1b76a3ac7635e6695339da7284")]
 [assembly: System.Reflection.AssemblyProductAttribute("InstagramService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InstagramService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

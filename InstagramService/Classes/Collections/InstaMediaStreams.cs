@@ -8,9 +8,9 @@ namespace InstagramService.Classes.Collections
     {
         private readonly List<InstaMediaStream> _mediaStreams;
 
-        public InstaMedia Media { get; private set; }
+        public InstaMedia Media { get; }
 
-        internal InstaMediaStreams(int size, InstaMedia media)
+        public InstaMediaStreams(int size, InstaMedia media)
         {
             _mediaStreams = new(Enumerable.Repeat<InstaMediaStream>(default!, size));
             Media = media;
